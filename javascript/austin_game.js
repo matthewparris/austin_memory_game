@@ -1,4 +1,4 @@
-var p1Score, p2Score;
+var p1Score, p2Score, cardPosition = [];
 
 function updateScore() {
   // Update score on screen
@@ -40,8 +40,7 @@ function startGame() {
 
     $('.thumbnail').bind('click', (e) =>  {
       e.preventDefault();
-      console.log(e.id);
-      $(e).attr('id');
+      console.log(e.currentTarget.id);
     });
 };
 

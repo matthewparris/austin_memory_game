@@ -94,6 +94,7 @@ function flipcard(e) {
       updateScore();
       $(".thumbnail[flipped='true']").attr('flipped', 'done'); // flipped is now done
       $(".thumbnail[flipped='done']").click(false); // done is now unclickable
+      $(".thumbnail[flipped='done']").addClass('fadeImage'); // done is now unclickable
     }
 
     if (isPlayerOne === false && (flippedResult1 === flippedResult2)) {

@@ -1,4 +1,31 @@
-var p1Score, p2Score, images = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12];
+var p1Score, p2Score, images = [];
+
+// Add my images
+images[images.length] = 'images/image1.jpg';
+images[images.length] = 'images/image1.jpg';
+images[images.length] = 'images/image2.jpg';
+images[images.length] = 'images/image2.jpg';
+images[images.length] = 'images/image3.jpg';
+images[images.length] = 'images/image3.jpg';
+images[images.length] = 'images/image4.jpg';
+images[images.length] = 'images/image4.jpg';
+images[images.length] = 'images/image5.jpg';
+images[images.length] = 'images/image5.jpg';
+images[images.length] = 'images/image6.jpg';
+images[images.length] = 'images/image6.jpg';
+images[images.length] = 'images/image7.jpg';
+images[images.length] = 'images/image7.jpg';
+images[images.length] = 'images/image8.jpg';
+images[images.length] = 'images/image8.jpg';
+images[images.length] = 'images/image9.jpg';
+images[images.length] = 'images/image9.jpg';
+images[images.length] = 'images/image10.jpg';
+images[images.length] = 'images/image10.jpg';
+images[images.length] = 'images/image11.jpg';
+images[images.length] = 'images/image11.jpg';
+images[images.length] = 'images/image12.jpg';
+images[images.length] = 'images/image12.jpg';
+
 
 function updateScore() {
   // Update score on screen
@@ -57,17 +84,28 @@ function startGame() {
     //  Place scores on screen
     updateScore();
 
-    // Card Position reset
-    shuffle(images);
+    // Card position reset
+    // shuffle(images);
 
     // // Add ID's for the cards
     // $('.thumbnail').each((e) => {
     //     console.log('thumbnail:' + $('.thumbnail').index(e));
     // });
 
+    // Add images (numbers for now) to each div
+    for (var i = 0; i < images.length + 1; i++) {
+      $('#' + i).find('img').after("<img class='img-responsive' id='answer' src='" + images[i - 1] + "'/>");
+    };
+
+    // Display none the value of the cards
+    $('.thumbnail>#answer').css('display', 'none');
+
+    // Assign click bind to all thumbnails/cards
     $('.thumbnail').bind('click', (e) =>  {
-      e.preventDefault();
       console.log(e.currentTarget.id);
+      // Flip images on cards
+      $(e.currentTarget).find('p').toggle();
+      $(e.currentTarget).find('img').toggle();
     });
 };
 

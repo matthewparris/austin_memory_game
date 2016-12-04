@@ -1,30 +1,33 @@
+// Variables for score, turn counter, how many cards flipped, which player turn it is and the images array
 var p1Score, p2Score, turnCount, cardFlipCount, isPlayerOne, images = [];
 
 // Add my images
-images[images.length] = [1, 'images/image1.jpg'];
-images[images.length] = [1, 'images/image1.jpg'];
-images[images.length] = [2, 'images/image2.jpg'];
-images[images.length] = [2, 'images/image2.jpg'];
-images[images.length] = [3, 'images/image3.jpg'];
-images[images.length] = [3, 'images/image3.jpg'];
-images[images.length] = [4, 'images/image4.jpg'];
-images[images.length] = [4, 'images/image4.jpg'];
-images[images.length] = [5, 'images/image5.jpg'];
-images[images.length] = [5, 'images/image5.jpg'];
-images[images.length] = [6, 'images/image6.jpg'];
-images[images.length] = [6, 'images/image6.jpg'];
-images[images.length] = [7, 'images/image7.jpg'];
-images[images.length] = [7, 'images/image7.jpg'];
-images[images.length] = [8, 'images/image8.jpg'];
-images[images.length] = [8, 'images/image8.jpg'];
-images[images.length] = [9, 'images/image9.jpg'];
-images[images.length] = [9, 'images/image9.jpg'];
-images[images.length] = [10, 'images/image10.jpg'];
-images[images.length] = [10, 'images/image10.jpg'];
-images[images.length] = [11, 'images/image11.jpg'];
-images[images.length] = [11, 'images/image11.jpg'];
-images[images.length] = [12, 'images/image12.jpg'];
-images[images.length] = [12, 'images/image12.jpg'];
+function setImages() {
+  images[images.length] = [1, 'images/image1.jpg'];
+  images[images.length] = [1, 'images/image1.jpg'];
+  images[images.length] = [2, 'images/image2.jpg'];
+  images[images.length] = [2, 'images/image2.jpg'];
+  images[images.length] = [3, 'images/image3.jpg'];
+  images[images.length] = [3, 'images/image3.jpg'];
+  images[images.length] = [4, 'images/image4.jpg'];
+  images[images.length] = [4, 'images/image4.jpg'];
+  images[images.length] = [5, 'images/image5.jpg'];
+  images[images.length] = [5, 'images/image5.jpg'];
+  images[images.length] = [6, 'images/image6.jpg'];
+  images[images.length] = [6, 'images/image6.jpg'];
+  images[images.length] = [7, 'images/image7.jpg'];
+  images[images.length] = [7, 'images/image7.jpg'];
+  images[images.length] = [8, 'images/image8.jpg'];
+  images[images.length] = [8, 'images/image8.jpg'];
+  images[images.length] = [9, 'images/image9.jpg'];
+  images[images.length] = [9, 'images/image9.jpg'];
+  images[images.length] = [10, 'images/image10.jpg'];
+  images[images.length] = [10, 'images/image10.jpg'];
+  images[images.length] = [11, 'images/image11.jpg'];
+  images[images.length] = [11, 'images/image11.jpg'];
+  images[images.length] = [12, 'images/image12.jpg'];
+  images[images.length] = [12, 'images/image12.jpg'];
+}
 
 function updateScore() {
   // Update score on screen
@@ -63,25 +66,15 @@ function shuffle(array) {
   return array;
 }
 
-// function getRandomInt(min, max) {
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
-
-// function addTile(name, image) {
-//   return () => {
-//     "<div class='col-sm-6 col-md-3'><div class='thumbnail' id='" + name + "'><div class='caption'>Austin's Memory Game</div></div></div>"
-//   }
-// }
-
 function flipcard(e) {
 
   // If a card is clicked, flip the images
   console.log('flipcard:'+ e.currentTarget.id);
   // Flip images on cards
   $(e.currentTarget).find('img').toggle(); // toggle the solution image if clicked
-  // $(e.currentTarget).find('.answer').click(false); // lock out click if flipped
+  $(e.currentTarget).find('.answer').click(false); // lock out click if flipped
   $(e.currentTarget).attr('flipped', 'true') // let's flag the card with an attr
-  cardFlipCount++;
+  cardFlipCount++; // Count the flip, if 2 then we wanna change turns
   console.log('flip count:' + cardFlipCount);
 
   if (cardFlipCount === 2) {
@@ -113,13 +106,13 @@ function flipcard(e) {
       isPlayerOne = true;
     };
 
-    // Game Over
+    // Game Over if points = 12
     if ((p1Score + p2Score) === 12) {
       console.log('Game Over.');
       $("#gameOverModal").modal('show');
     }
 
-    // $('#gameGrid').click(false); // don't want anyone clicking after 2 cards are revealed
+    // $('.thumbnail>img').click(false); // don't want anyone clicking after 2 cards are revealed
     setTimeout(() => {
       $(".thumbnail[flipped='true']").find('img').toggle(); // toggle generic image
       $(".thumbnail[flipped='true']").attr('flipped', 'false'); // flipped is now false
@@ -131,14 +124,14 @@ function flipcard(e) {
       console.log('turn: ' + turnCount);
       console.log('isPlayerOne:' + isPlayerOne);
 
-      // $('#gameGrid').click(true); // make cards clickable again
+      // $('.thumbnail>img').click(true); // make cards clickable again
     }, 3000)
   }
 }
 
 function startGame() {
 
-  // Initialze variables
+  // Initialize variables
   p1Score = 0;
   p2Score = 0;
   turnCount = 1;
@@ -149,9 +142,11 @@ function startGame() {
   updateScore();
 
   // Card position reset
+  setImages();
   shuffle(images);
 
   // Add images to each div
+  $('.answer').remove(); // Remove any answer tiles first if any
   for (var i = 1; i < images.length + 1; i++) {
     $('#' + i).find('img').after("<img class='img-responsive answer' id='solution " + images[i - 1][0] + "' src='" + images[i- 1][1] + "'/>");
     console.log(i + " " + images[i - 1]);

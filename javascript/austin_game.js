@@ -105,17 +105,32 @@ function flipcard(e) {
       $(".thumbnail[flipped='done']").addClass('fadeImage'); // done is now unclickable
     }
 
-    // need to figure out who to score if there's a match
+    // Need to figure out who to score if there's a match
     if (isPlayerOne === true) {
       isPlayerOne = false;
     } else {
       isPlayerOne = true;
     };
 
-    // Game Over if points = 12
-    if ((p1Score + p2Score) === 12) {
+    console.log(p1Score + "  " + p2Score);
+
+    // Game Over if points hits 12
+    if ((p1Score + p2Score) === 12 ) {
       console.log('Game Over.');
-      $("#gameOverModal").modal('show');
+      if (p1Score > p2Score) {
+        console.log(((p1Score + p2Score) === 12) );
+        $('#winner').text('1');
+      } else if (p1Score < p2Score) {
+        console.log(((p1Score + p2Score) === 12) );
+
+        $('#winner').text('2');
+      } else {
+        console.log(((p1Score + p2Score) === 12) );
+
+        $('#winner').text('1 & 2');
+      }
+
+      $("#gameOverModal").modal('show'); // display game over modal
     }
 
     // $('.thumbnail>img').click(false); // don't want anyone clicking after 2 cards are revealed

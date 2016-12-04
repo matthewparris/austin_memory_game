@@ -104,7 +104,6 @@ function flipcard(e) {
       updateScore();
       $(".thumbnail[flipped='true']").attr('flipped', 'done'); // flipped is now done
       $(".thumbnail[flipped='done']").click(false); // done is now unclickable
-
     }
 
     // need to figure out who to score if there's a match
@@ -113,6 +112,12 @@ function flipcard(e) {
     } else {
       isPlayerOne = true;
     };
+
+    // Game Over
+    if ((p1Score + p2Score) === 12) {
+      console.log('Game Over.');
+      $("#gameOverModal").modal('show');
+    }
 
     // $('#gameGrid').click(false); // don't want anyone clicking after 2 cards are revealed
     setTimeout(() => {
@@ -153,6 +158,7 @@ function startGame() {
   };
 
   // Display:none the value of the cards
+  $('.thumbnail').css('flipped', 'false');
   $('.thumbnail>.answer').css('display', 'none');
 
   // Assign click bind to all thumbnails/cards

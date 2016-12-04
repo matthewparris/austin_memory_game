@@ -131,7 +131,7 @@ function flipcard(e) {
       console.log('isPlayerOne:' + isPlayerOne);
 
       // $('.thumbnail>img').click(true); // make cards clickable again
-    }, 3000)
+    }, 1500)
   }
 }
 

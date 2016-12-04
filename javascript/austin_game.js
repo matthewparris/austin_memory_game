@@ -29,6 +29,10 @@ function setImages() {
   images[images.length] = [12, 'images/image12.jpg'];
 }
 
+function resetGame() {
+  window.location.reload();
+}
+
 function updateScore() {
   // Update score on screen
     $('#p1_score').text(p1Score);

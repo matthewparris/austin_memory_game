@@ -14,3 +14,5 @@ Stuff to do:
 
 5.  Add a favicon
 
+6. Fix that error where the user can click on more than one card during the turn
+
